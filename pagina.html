@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Películas</title>
+    <link rel="stylesheet" href="pagina.css">
+    <script src="pagina.js" defer></script>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Catálogo de Películas por categoría</h1>
+
+        <div class="buscador">
+            <input type="text" id="categoria" placeholder="Ej: Comedia" autocomplete="off">
+            <button onclick="buscarPorCategoria()">Buscar</button>
+            <button onclick="mostrarPeliculas()">Mostrar Todas</button>
+        </div>
+
+        <div class="grid-peliculas" id="lista-peliculas">
+            <!-- Películas se insertan aquí -->
+        </div>
+    </div>
+</body>
+</html>
