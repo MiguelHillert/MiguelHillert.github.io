@@ -5,33 +5,132 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Explora nuestro catálogo de películas por categoría. Busca y descubre películas de animación, acción, ciencia ficción y más." />
   <title>Catálogo de Películas</title>
+  
+  <!-- Favicons -->
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  
+  <!-- Precargas y estilos -->
   <link rel="preload" href="pagina.css" as="style" />
   <link rel="stylesheet" href="pagina.css" />
   <script src="pagina.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <meta name="theme-color" content="#121212" />
 </head>
 <body>
   <main class="contenedor">
-    <h1>Catálogo de Películas por Categoría</h1>
-
+    <h1>
+      <i class="fas fa-film"></i> Catálogo de Películas
+    </h1>
     <form class="buscador" id="formulario-busqueda" role="search">
-      <label for="categoria" class="visually-hidden">Categoría</label>
-      <input
-        type="text"
-        id="categoria"
-        name="categoria"
-        placeholder="Ej: Comedia"
-        autocomplete="off"
-        aria-label="Buscar categoría de película"
-      />
-      <button type="submit" aria-label="Buscar películas">Buscar</button>
-      <button type="button" id="btn-mostrar-todas" aria-label="Mostrar todas las películas">Mostrar Todas</button>
+      <div class="campo-busqueda">
+        <label for="nombre" class="visually-hidden">Título de película</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          placeholder="Buscar por título"
+          autocomplete="off"
+          aria-label="Buscar por título de película"
+        />
+      </div>
+      
+      <div class="campo-busqueda">
+        <label for="categoria" class="visually-hidden">Categoría</label>
+        <select
+          id="categoria"
+          name="categoria"
+          aria-label="Filtrar por categoría de película"
+        >
+          <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+        </select>
+      </div>
+      
+      <div class="botones-busqueda">
+        <button type="submit" aria-label="Buscar películas">Buscar</button>
+        <button type="button" id="btn-mostrar-todas" aria-label="Mostrar todas las películas">Mostrar Todas</button>
+      </div>
     </form>
-
+    
     <section class="grid-peliculas" id="lista-peliculas" aria-live="polite">
       <!-- Películas se insertan aquí -->
       <p id="estado-carga" role="status">Cargando películas...</p>
     </section>
   </main>
+  
+  <footer class="footer">
+    <div class="footer-contenido">
+      <div class="footer-seccion">
+        <h3>Sobre Nosotros</h3>
+        <p>Somos un catálogo de películas diseñado para ayudarte a descubrir nuevo contenido cinematográfico en base a tus preferencias y gustos.</p>
+        <div class="redes-sociales">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-seccion">
+        <h3>Categorías Populares</h3>
+        <ul>
+          <li><a href="#" onclick="seleccionarCategoria('Acción'); return false;">Acción</a></li>
+          <li><a href="#" onclick="seleccionarCategoria('Ciencia Ficción'); return false;">Ciencia Ficción</a></li>
+          <li><a href="#" onclick="seleccionarCategoria('Animación'); return false;">Animación</a></li>
+          <li><a href="#" onclick="seleccionarCategoria('Drama'); return false;">Drama</a></li>
+          <li><a href="#" onclick="seleccionarCategoria('Musical'); return false;">Musical</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-seccion">
+        <h3>Enlaces Útiles</h3>
+        <ul>
+          <li><a href="#">Películas Recientes</a></li>
+          <li><a href="#">Top 10 Semanal</a></li>
+          <li><a href="#">Clásicos Recomendados</a></li>
+          <li><a href="#">Política de Privacidad</a></li>
+          <li><a href="#">Términos de Servicio</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-seccion">
+        <h3>Contacto</h3>
+        <p><i class="fas fa-envelope"></i> info@catalogopeliculas.com</p>
+        <p><i class="fas fa-phone"></i> +34 900 123 456</p>
+        <p><i class="fas fa-map-marker-alt"></i> Calle Cinematográfica, 123</p>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; 2025 Catálogo de Películas. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Función para seleccionar una categoría desde el footer
+    function seleccionarCategoria(categoria) {
+      const selectCategoria = document.getElementById('categoria');
+      
+      // Buscar la opción que coincida con la categoría
+      for (let i = 0; i < selectCategoria.options.length; i++) {
+        if (selectCategoria.options[i].textContent === categoria) {
+          selectCategoria.selectedIndex = i;
+          
+          // Disparar el evento change para activar la búsqueda
+          const event = new Event('change');
+          selectCategoria.dispatchEvent(event);
+          
+          // Desplazar la página hacia arriba para ver los resultados
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+          
+          break;
+        }
+      }
+    }
+  </script>
 </body>
 </html>
